@@ -1,0 +1,225 @@
+{
+  "entities": {
+    "users": {
+      "title": "User Profiles & Accounts",
+      "description": "User account information, preferences, role, credits and verification state",
+      "properties": {
+        "uid": { "type": "string" },
+        "email": { "type": "string" },
+        "fullName": { "type": "string" },
+        "role": { "type": "string", "enum": ["candidate", "recruiter", "freelancer", "admin"] },
+        "plan": { "type": "string" },
+        "credits": { "type": "number" },
+        "idVerified": { "type": "boolean" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "companies": {
+      "title": "Company Profiles",
+      "description": "Verified corporate profiles recruiting on the platform",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "sector": { "type": "string" },
+        "country": { "type": "string" },
+        "city": { "type": "string" },
+        "website": { "type": "string" },
+        "email": { "type": "string" },
+        "verified": { "type": "boolean" },
+        "openJobsCount": { "type": "number" }
+      },
+      "required": ["name", "email"]
+    },
+    "job_postings": {
+      "title": "Job Postings & Recruiting Offers",
+      "description": "Global job offers posted by hiring companies",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "companyName": { "type": "string" },
+        "location": { "type": "string" },
+        "country": { "type": "string" },
+        "sector": { "type": "string" },
+        "contractType": { "type": "string" },
+        "salaryMin": { "type": "number" },
+        "salaryMax": { "type": "number" },
+        "currency": { "type": "string" },
+        "remoteAvailable": { "type": "boolean" },
+        "featured": { "type": "boolean" },
+        "postedDate": { "type": "string" }
+      },
+      "required": ["title", "companyName", "contractType"]
+    },
+    "job_applications": {
+      "title": "Job Applications",
+      "description": "Candidate job applications and AI compatibility scores",
+      "properties": {
+        "id": { "type": "string" },
+        "jobId": { "type": "string" },
+        "applicantUid": { "type": "string" },
+        "applicantEmail": { "type": "string" },
+        "status": { "type": "string" },
+        "compatibilityScore": { "type": "number" },
+        "coverLetter": { "type": "string" },
+        "resumeUrl": { "type": "string" },
+        "appliedDate": { "type": "string" }
+      },
+      "required": ["jobId", "applicantEmail"]
+    },
+    "resumes": {
+      "title": "Resumes & CV Models",
+      "description": "Structured candidate CVs, skills, and work experience",
+      "properties": {
+        "uid": { "type": "string" },
+        "fullName": { "type": "string" },
+        "title": { "type": "string" },
+        "skills": { "type": "array" },
+        "bio": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid"]
+    },
+    "cover_letters": {
+      "title": "AI Generated Cover Letters",
+      "description": "AI-generated cover letters tailored to specific jobs",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "jobId": { "type": "string" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "jobId", "content"]
+    },
+    "freelance_services": {
+      "title": "Freelance Marketplace Services",
+      "description": "Services listed by micro-agencies and freelancers",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "providerName": { "type": "string" },
+        "category": { "type": "string" },
+        "startingPrice": { "type": "number" },
+        "rating": { "type": "number" }
+      },
+      "required": ["title", "providerName", "startingPrice"]
+    },
+    "messages": {
+      "title": "Messaging & Email Outbox",
+      "description": "Direct emails and messages sent between candidates and recruiters",
+      "properties": {
+        "id": { "type": "string" },
+        "senderEmail": { "type": "string" },
+        "recipientEmail": { "type": "string" },
+        "subject": { "type": "string" },
+        "body": { "type": "string" },
+        "date": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["senderEmail", "recipientEmail", "subject", "body"]
+    },
+    "notifications": {
+      "title": "User Notifications",
+      "description": "Application updates, interview alerts, and system notifications",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "read": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "title", "message"]
+    },
+    "subscriptions": {
+      "title": "User Subscriptions",
+      "description": "Active subscriptions and billing cycles",
+      "properties": {
+        "userId": { "type": "string" },
+        "plan": { "type": "string" },
+        "status": { "type": "string" },
+        "startDate": { "type": "string" },
+        "autoRenew": { "type": "boolean" }
+      },
+      "required": ["userId", "plan"]
+    },
+    "transactions": {
+      "title": "Payment Receipts & Transactions",
+      "description": "Financial payment receipts for subscription plans",
+      "properties": {
+        "userId": { "type": "string" },
+        "amount": { "type": "number" },
+        "plan": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["userId", "amount"]
+    },
+    "activity_logs": {
+      "title": "System Activity Logs",
+      "description": "Audit trail of security events, searches, and applications",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "action": { "type": "string" },
+        "timestamp": { "type": "string" },
+        "ip": { "type": "string" }
+      },
+      "required": ["action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "users",
+      "description": "User profile document"
+    },
+    "/companies/{companyId}": {
+      "schema": "companies",
+      "description": "Verified company document"
+    },
+    "/job_postings/{jobId}": {
+      "schema": "job_postings",
+      "description": "Job offer document"
+    },
+    "/job_applications/{applicationId}": {
+      "schema": "job_applications",
+      "description": "Job application document"
+    },
+    "/resumes/{resumeId}": {
+      "schema": "resumes",
+      "description": "User candidate resume document"
+    },
+    "/cover_letters/{letterId}": {
+      "schema": "cover_letters",
+      "description": "AI cover letter document"
+    },
+    "/freelance_services/{serviceId}": {
+      "schema": "freelance_services",
+      "description": "Freelance marketplace service"
+    },
+    "/messages/{messageId}": {
+      "schema": "messages",
+      "description": "Message or email log document"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "notifications",
+      "description": "Notification document"
+    },
+    "/subscriptions/{subId}": {
+      "schema": "subscriptions",
+      "description": "Subscription document"
+    },
+    "/transactions/{txId}": {
+      "schema": "transactions",
+      "description": "Transaction document"
+    },
+    "/activity_logs/{logId}": {
+      "schema": "activity_logs",
+      "description": "Audit log document"
+    }
+  }
+}

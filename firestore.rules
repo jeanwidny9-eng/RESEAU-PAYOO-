@@ -1,0 +1,105 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Global Security Helper Functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isVerifiedUser() {
+      return isAuthenticated();
+    }
+
+    // Default catch-all: Deny all reads/writes unless explicitly allowed below
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // 1. Users Collection
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow write: if isOwner(userId);
+    }
+
+    // 2. Companies Collection (Public read, authenticated creation/management)
+    match /companies/{companyId} {
+      allow read: if true;
+      allow create, update: if isAuthenticated();
+      allow delete: if isAuthenticated();
+    }
+
+    // 3. Job Postings Collection (Public read, authenticated creation/management)
+    match /job_postings/{jobId} {
+      allow read: if true;
+      allow create, update, delete: if isAuthenticated();
+    }
+
+    // 4. Job Applications Collection
+    match /job_applications/{applicationId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated();
+      allow update, delete: if isAuthenticated();
+    }
+
+    // 5. Resumes Collection
+    match /resumes/{resumeId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // 6. Cover Letters Collection
+    match /cover_letters/{letterId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 7. Freelance Services Collection (Public read, authenticated write)
+    match /freelance_services/{serviceId} {
+      allow read: if true;
+      allow write: if isAuthenticated();
+    }
+
+    // 8. Messages & Email Logs Collection
+    match /messages/{messageId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 9. Notifications Collection
+    match /notifications/{notifId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 10. Subscriptions Collection
+    match /subscriptions/{subId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 11. Transactions & Financial Receipts Collection
+    match /transactions/{txId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 12. Saved Leads / Saved Jobs Collection
+    match /savedLeads/{leadDocId} {
+      allow read, write: if isAuthenticated();
+    }
+
+    // 13. System Activity Logs Collection
+    match /activity_logs/{logId} {
+      allow read, create: if isAuthenticated();
+      allow update, delete: if false;
+    }
+
+    // 14. Analytics & Metrics Collection
+    match /analytics/{metricId} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "PAYOO Rézo d'Haïti",
+  "description": "Premye rezo sosyal ak platfòm videyo, livestream, sipòtè ak monètizasyon an Ayiti 🇭🇹. PAYOO Rézo d'Haïti.",
+  "requestFramePermissions": ["camera", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
