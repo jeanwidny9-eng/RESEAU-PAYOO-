@@ -417,6 +417,25 @@ export interface PayooUser {
   location?: string;
 }
 
+export interface VideoComment {
+  id: string;
+  user: string;
+  avatar: string;
+  text: string;
+  time: string;
+  likes: number;
+  isLiked?: boolean;
+}
+
+export interface VideoGift {
+  id: string;
+  user: string;
+  giftName: string;
+  amountHTG: number;
+  icon: string;
+  time: string;
+}
+
 export interface PayooVideo {
   id: string;
   authorId: string;
@@ -436,6 +455,11 @@ export interface PayooVideo {
   isLiked?: boolean;
   isSaved?: boolean;
   isBoosted?: boolean;
+  isFollowing?: boolean;
+  audioTrack?: string;
+  audioAuthor?: string;
+  commentsList?: VideoComment[];
+  giftContributions?: VideoGift[];
   createdAt: string;
   tags: string[];
 }

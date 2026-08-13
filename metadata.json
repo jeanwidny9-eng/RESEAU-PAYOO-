@@ -1,6 +1,6 @@
 {
-  "name": "PAYOO Rézo d'Haïti",
-  "description": "Premye rezo sosyal ak platfòm videyo, livestream, sipòtè ak monètizasyon an Ayiti 🇭🇹. PAYOO Rézo d'Haïti.",
+  "name": "NicheLead Finder & Global Job Hub",
+  "description": "Plateforme tout-en-un de recherche d'emploi mondiale, prospection B2B, talents, IA Gemini Advisor & services professionnels.",
   "requestFramePermissions": ["camera", "microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
